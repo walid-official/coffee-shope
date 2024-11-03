@@ -4,6 +4,9 @@ import ErrorPage from '../Pages/ErrorPage';
 import Main from '../Layout/Main';
 import Home from '../Pages/Home';
 import Coffee from '../Pages/Coffee';
+import BrewedCoffee from '../components/BrewedCoffee';
+import DeshBoard from '../components/DeshBoard';
+import CoffeDetails from '../Pages/CoffeDetails';
 
 const router = createBrowserRouter([
     {
@@ -13,12 +16,29 @@ const router = createBrowserRouter([
       children: [
         {
           path: '/',
-          element: <Home></Home>
+          element: <Home></Home>,
+          loader: () => fetch('../categories.json'),
+          children: [
+            {
+              path: 'CategoryCoffee/:CategoryId',
+              element: <BrewedCoffee></BrewedCoffee>,
+              loader: () => fetch('../coffees.json')
+            }
+          ]
         },
         {
           path: "Coffee",
           element: <Coffee></Coffee>,
           loader: () => fetch('/public/coffees.json')
+        },
+        {
+          path: "DashBoard",
+          element: <DeshBoard></DeshBoard>
+        },
+        {
+          path: "/CoffeeDetails/:CoffeeId",
+          element: <CoffeDetails></CoffeDetails>,
+          loader: () => fetch('../coffees.json')
         }
       ]
     },
