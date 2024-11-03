@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLoaderData, useParams } from "react-router-dom";
+import { addToCoffeeList } from '../Utilities/storeCoffee';
 
 const CoffeDetails = () => {
     const coffeeDetails = useLoaderData();
@@ -26,12 +27,15 @@ const CoffeDetails = () => {
         setCoffee(singleData);
     },[coffeeDetails,CoffeeId])
 
+    const handleCoffeeList = () => {
+        addToCoffeeList(id)
+    }
 
     return (
         <div className='w-11/12 mx-auto'>
             <div className="card card-compact bg-base-100 shadow-xl">
           <div className="flex flex-col">
-            <figure className="h-[300px] w-full">
+            <figure className="h-[450px] w-full">
               <img
                 className="h-full w-full object-cover rounded-lg"
                 src={image}
@@ -49,7 +53,7 @@ const CoffeDetails = () => {
               </div>
             </div>
             <div className="my-4 ml-4">
-                <button className='btn'>Add Favorite</button>
+                <button onClick={() => handleCoffeeList(CoffeeId)} className='btn'>Add Favorite</button>
             </div>
           </div>
         </div>
