@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useLoaderData, useParams } from "react-router-dom";
-import { addToCoffeeList } from '../Utilities/storeCoffee';
+import { addToCoffeeList, getCoffeeList } from '../Utilities/storeCoffee';
 
 const CoffeDetails = () => {
     const coffeeDetails = useLoaderData();
     const {CoffeeId} = useParams();
     const [coffee,setCoffee] = useState({});
+    const [favorite,setFavorite] = useState(false);
 
     const {
         image,
@@ -25,10 +26,15 @@ const CoffeDetails = () => {
     useEffect(() => {
         const singleData = coffeeDetails.find(coffee => coffee.id === parseInt(CoffeeId));
         setCoffee(singleData);
+        const favorites = getCoffeeList();
+        if(favorites.includes(id)){
+            setFavorite(true);
+        }
     },[coffeeDetails,CoffeeId])
 
     const handleCoffeeList = () => {
-        addToCoffeeList(id)
+        addToCoffeeList(id);
+        setFavorite(true);
     }
 
     return (
@@ -53,7 +59,7 @@ const CoffeDetails = () => {
               </div>
             </div>
             <div className="my-4 ml-4">
-                <button onClick={() => handleCoffeeList(CoffeeId)} className='btn'>Add Favorite</button>
+                <button disabled={favorite} onClick={() => handleCoffeeList(CoffeeId)} className='btn'>Add Favorite</button>
             </div>
           </div>
         </div>

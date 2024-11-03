@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 const getCoffeeList = () => {
     const storedCoffeeList = localStorage.getItem('coffee-list');
     if(storedCoffeeList){
@@ -12,12 +14,22 @@ const getCoffeeList = () => {
 const addToCoffeeList = (id) => {
     const StoredCoffee = getCoffeeList();
     if(StoredCoffee.includes(id)){
-        alert(id,"Already Exists in The Read List")
+        toast.error('This is an error!')
     }else{
         StoredCoffee.push(id);
         const storedListCoffee = JSON.stringify(StoredCoffee);
         localStorage.setItem('coffee-list',storedListCoffee);
+        toast.success('successfully added')
     }
 }
 
-export {getCoffeeList,addToCoffeeList};
+const removeFromCoffeeList = (id) => {
+    console.log(id);
+    const favorites = getCoffeeList();
+    const remaining = favorites.filter(coffee => coffee  != id);
+    console.log(remaining);
+    const storedListCoffee = JSON.stringify(remaining);
+        localStorage.setItem('coffee-list',storedListCoffee);
+        toast.success('successfully removed')
+}
+export {getCoffeeList,addToCoffeeList,removeFromCoffeeList};

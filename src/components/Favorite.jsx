@@ -1,6 +1,7 @@
 import React from "react";
+import { removeFromCoffeeList } from "../Utilities/storeCoffee";
 
-const Favorite = ({ favorite }) => {
+const Favorite = ({ favorite,handleRemove }) => {
   const {
     image,
     name,
@@ -15,6 +16,13 @@ const Favorite = ({ favorite }) => {
     description,
     making_process,
   } = favorite;
+
+
+
+ 
+
+
+
   return (
     <div>
       <div className="card card-compact bg-base-100 shadow-xl">
@@ -34,6 +42,9 @@ const Favorite = ({ favorite }) => {
               <h2 className="text-xl">Origin: {origin}</h2>
               <h2 className="text-xl">Popularity: {popularity}</h2>
               <h2 className="text-xl">Rating: {rating}</h2>
+            </div>
+            <div onClick={() => handleRemove(id)} className="">
+              <button  className="btn">Delete Item</button>
             </div>
           </div>
         </div>

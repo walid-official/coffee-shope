@@ -6,8 +6,8 @@ import Card from './Card';
 const BrewedCoffee = () => {
     const categoryCoffee = useLoaderData();
     const {CategoryId} = useParams()
-    const [coffees,setCoffees] = useState([categoryCoffee]);
-    // const navigate = useNavigate();
+    const [coffees,setCoffees] = useState([]);
+
     useEffect(() => {
 
         if(CategoryId){
@@ -19,7 +19,7 @@ const BrewedCoffee = () => {
 
     }, [categoryCoffee,CategoryId])
 
-    console.log(categoryCoffee);
+    console.log(coffees);
     return (
         <>
             
